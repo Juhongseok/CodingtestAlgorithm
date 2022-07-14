@@ -1,11 +1,11 @@
-package programmers.skillcheck2;
+package programmers.level2;
 
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Solution1 {
+public class MaxMinValue {
     static class Result{
         public static String solution(String s) {
             List<Integer> arr = Arrays.stream(s.split(" "))

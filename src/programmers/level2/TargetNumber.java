@@ -1,7 +1,7 @@
-package programmers.skillcheck2;
+package programmers.level2;
 
 
-public class Solution2 {
+public class TargetNumber {
     static class Result {
         public static int solution(int[] numbers, int target) {
             return calc(numbers, 0, 0, target);
