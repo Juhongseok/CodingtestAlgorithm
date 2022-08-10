@@ -54,7 +54,12 @@ public class Laboratory {
     }
 
     private static int[][] spreadVirus(int[][] lab) {
-        int[][] virusMap = Arrays.copyOf(lab, lab.length);
+        int[][] virusMap = new int[lab.length][lab[0].length];
+        for (int i = 0; i < lab.length; i++) {
+            for (int j = 0; j < lab[0].length; j++) {
+                virusMap[i][j] = lab[i][j];
+            }
+        }
 
         int[] moveX = {0, 1, 0, -1};
         int[] moveY = {1, 0, -1, 0};
