@@ -1,8 +1,9 @@
 package current.programmers;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class TableHashFunction {
 
@@ -18,23 +19,16 @@ public class TableHashFunction {
         private List<Row> rows;
 
         public Table(int[][] data, int targetColumn) {
-            List<Row> rows = new ArrayList<>();
-            for (int[] d : data) {
-                rows.add(new Row(d[0], d[targetColumn - 1], d));
-            }
-            Collections.sort(rows);
-
-            this.rows = rows;
+            this.rows = Arrays.stream(data)
+                    .map(d -> new Row(d[0], d[targetColumn - 1], d))
+                    .sorted()
+                    .toList();
         }
 
         public int hash(int from, int to) {
-            int answer = 0;
-
-            for (int i = from - 1; i < to; i++) {
-                answer ^= rows.get(i).getSValue(i + 1);
-            }
-
-            return answer;
+            return IntStream.range(from - 1, to)
+                    .map(i -> rows.get(i).getSValue(i + 1))
+                    .reduce(0, (a, b) -> a ^ b);
         }
 
     }
