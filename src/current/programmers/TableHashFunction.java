@@ -1,6 +1,5 @@
 package current.programmers;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -20,7 +19,7 @@ public class TableHashFunction {
 
         public Table(int[][] data, int targetColumn) {
             this.rows = Arrays.stream(data)
-                    .map(d -> new Row(d[0], d[targetColumn - 1], d))
+                    .map(d -> new Row(d, targetColumn - 1))
                     .sorted()
                     .toList();
         }
@@ -38,14 +37,10 @@ public class TableHashFunction {
         private int sortedValue;
         private List<Integer> rowValues;
 
-        public Row(int primaryKey, int sortedValue, int[] rowValues) {
-            this.primaryKey = primaryKey;
-            this.sortedValue = sortedValue;
-            List<Integer> temp = new ArrayList<>();
-            for (int rowValue : rowValues) {
-                temp.add(rowValue);
-            }
-            this.rowValues = temp;
+        public Row(int[] data, int sortedValue) {
+            this.primaryKey = data[0];
+            this.sortedValue = data[sortedValue];
+            this.rowValues = Arrays.stream(data).boxed().toList();
         }
 
         public int getSValue(int modular) {
